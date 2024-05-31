@@ -1,0 +1,32 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: binary_file
+      id: binary_file
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: binary_file
+        setup-command: bash tests/correct.sh
+        command: echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        BINARY_FILE_RESULTS: "${{steps.binary_file.outputs.result}}"
+      with:
+        runners: binary_file
