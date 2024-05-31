@@ -18,7 +18,84 @@ jobs:
       with:
         test-name: binary_file
         setup-command: gcc rev_file.c -o rev
+        command: bash tests/binary_file.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: correct
+      id: correct
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: correct
+        setup-command: gcc rev_file.c -o rev
         command: bash tests/correct.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: empty_file
+      id: empty_file
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: empty_file
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/empty_file.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: no_src
+      id: no_src
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: no_src
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/no_src.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: rev_into_dir
+      id: rev_into_dir
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: rev_into_dir
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/rev_into_dir.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: src_is_dir
+      id: src_is_dir
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: src_is_dir
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/src_is_dir.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: src_not_readable
+      id: src_not_readable
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: src_not_readable
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/src_not_readable.sh && echo $?
+        expected-output: 0
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: test_2args
+      id: test_2args
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_2args
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/test_2args.sh && echo $?
         expected-output: 0
         comparison-method: contains
         timeout: 10
@@ -27,5 +104,12 @@ jobs:
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         BINARY_FILE_RESULTS: "${{steps.binary_file.outputs.result}}"
+        CORRECT_RESULTS: "${{steps.correct.outputs.result}}"
+        EMPTY_FILE_RESULTS: "${{steps.empty_file.outputs.result}}"
+        NO_SRC _RESULTS: "${{steps.no_src.outputs.result}}"
+        REV_INTO_DIR_RESULTS: "${{steps.rev_into_dir.outputs.result}}"
+        SRC_IS_DIR_RESULTS: "${{steps.src_is_dir.outputs.result}}"
+        SRC_NOT_READABLE_RESULTS: "${{steps.src_not_readable.outputs.result}}"
+        TEST_2ARGS_RESULTS: "${{steps.test_2args.outputs.result}}"
       with:
-        runners: binary_file
+        runners: binary_file,correct,empty_file,no_src,rev_into_dir,src_is_dir,src_not_readable,test_2args
