@@ -12,11 +12,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: binary_file
-      id: binary_file
+    - name: binary-file
+      id: binary-file
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: binary_file
+        test-name: binary-file
         setup-command: gcc rev_file.c -o rev
         command: bash tests/binary_file.sh && echo $?
         expected-output: 0
@@ -34,33 +34,33 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: empty_file
-      id: empty_file
+    - name: empty-file
+      id: empty-file
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: empty_file
+        test-name: empty-file
         setup-command: gcc rev_file.c -o rev
         command: bash tests/empty_file.sh && echo $?
         expected-output: 0
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: no_src
-      id: no_src
+    - name: no-src
+      id: no-src
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: no_src
+        test-name: no-src
         setup-command: gcc rev_file.c -o rev
         command: bash tests/no_src.sh && echo $?
         expected-output: 0
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: rev_into_dir
-      id: rev_into_dir
+    - name: rev-into-dir
+      id: rev-into-dir
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: rev_into_dir
+        test-name: rev-into-dir
         setup-command: gcc rev_file.c -o rev
         command: bash tests/rev_into_dir.sh && echo $?
         expected-output: 0
@@ -78,22 +78,22 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: src_not_readable
-      id: src_not_readable
+    - name: src-not-readable
+      id: src-not-readable
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: src_not_readable
+        test-name: src-not-readable
         setup-command: gcc rev_file.c -o rev
         command: bash tests/src_not_readable.sh && echo $?
         expected-output: 0
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: test_2args
-      id: test_2args
+    - name: test-2args
+      id: test-2args
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: test_2args
+        test-name: test-2args
         setup-command: gcc rev_file.c -o rev
         command: bash tests/test_2args.sh && echo $?
         expected-output: 0
@@ -103,13 +103,13 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        BINARY_FILE_RESULTS: "${{steps.binary_file.outputs.result}}"
-        CORRECT_RESULTS: "${{steps.correct.outputs.result}}"
-        EMPTY_FILE_RESULTS: "${{steps.empty_file.outputs.result}}"
-        NO_SRC _RESULTS: "${{steps.no_src.outputs.result}}"
-        REV_INTO_DIR_RESULTS: "${{steps.rev_into_dir.outputs.result}}"
-        SRC_IS_DIR_RESULTS: "${{steps.src_is_dir.outputs.result}}"
-        SRC_NOT_READABLE_RESULTS: "${{steps.src_not_readable.outputs.result}}"
-        TEST_2ARGS_RESULTS: "${{steps.test_2args.outputs.result}}"
+        BINARY-FILE-RESULTS: "${{steps.binary-file.outputs.result}}"
+        CORRECT-RESULTS: "${{steps.correct.outputs.result}}"
+        EMPTY-FILE-RESULTS: "${{steps.empty-file.outputs.result}}"
+        NO-SRC -RESULTS: "${{steps.no-src.outputs.result}}"
+        REV-INTO-DIR-RESULTS: "${{steps.rev-into-dir.outputs.result}}"
+        SRC-IS-DIR-RESULTS: "${{steps.src-is-dir.outputs.result}}"
+        SRC-NOT-READABLE-RESULTS: "${{steps.src-not-readable.outputs.result}}"
+        TEST-2ARGS-RESULTS: "${{steps.test-2args.outputs.result}}"
       with:
-        runners: binary_file,correct,empty_file,no_src,rev_into_dir,src_is_dir,src_not_readable,test_2args
+        runners: binary-file,correct,empty-file,no-src,rev-into-dir,src-is-dir,src-not-readable,test-2args
