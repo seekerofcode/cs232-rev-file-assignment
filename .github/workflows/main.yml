@@ -1,7 +1,6 @@
 name: Autograding Tests
 'on':
 - push
-- repository_dispatch
 permissions:
   checks: write
   actions: read
@@ -18,8 +17,8 @@ jobs:
       uses: classroom-resources/autograding-io-grader@v1
       with:
         test-name: binary_file
-        setup-command: bash tests/correct.sh
-        command: echo $?
+        setup-command: gcc rev_file.c -o rev
+        command: bash tests/correct.sh && echo $?
         expected-output: 0
         comparison-method: contains
         timeout: 10
